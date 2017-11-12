@@ -13,13 +13,8 @@ object SparkSas7BDat {
     val sasfile = "world_cities.sas7bdat"
     
     val sparkConf = new SparkConf().setAppName("SparkSas7BDat")
-    .setMaster("local")
-    .set("spark.driver.allowMultipleContexts", "true")
-
     val sc = new SparkContext(sparkConf)
-    //sc.setLogLevel("DEBUG")
     val sqlContext = new SQLContext(sc)
-    //sqlContext.setConf("spark.sql.parquet.compression.codec", "snappy")
 
     val sas_data = sqlContext.read.format("com.github.saurfang.sas.spark").load(sasfile).cache()
     
